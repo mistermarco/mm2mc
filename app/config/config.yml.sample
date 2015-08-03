@@ -1,0 +1,23 @@
+# MailChimp Configuration
+mc:
+  # https://apidocs.mailchimp.com/
+  api_version: '3.0'
+  # http://kb.mailchimp.com/accounts/management/about-api-keys
+  api_key: <your mailchimp api key>
+  # http://kb.mailchimp.com/lists/managing-subscribers/find-your-list-id
+  list_id: <your list id>
+
+# Database Connection Information
+db:
+    driver:   pdo_mysql
+    host:     mysql-user.stanford.edu
+    name:     <database name>
+    user:     <username>
+    password: <password>
+
+# List of Mailman Lists (without the @lists.stanford.edu)
+# The person / service running this script needs to be an admin of these lists
+lists:
+     - list-one
+     - list-two
+     - list-three
