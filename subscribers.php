@@ -55,7 +55,7 @@ foreach ($subscribers as $address) {
 	  // keep track of new subscribers
 	  $new_subscribers[] = $address;
       echo $body->email_address . ' has been ' . $body->status . "\n";
-    } catch (ClientException $e) {
+    } catch (GuzzleHttp\Exception\ClientException $e) {
       // Return any errors
       $code   = $e->getResponse()->getStatusCode();
       $phrase = $e->getResponse()->getReasonPhrase();
@@ -72,7 +72,7 @@ foreach ($subscribers as $address) {
           $em->persist($email);
 	    }
 	  }
-    } catch (ServerException $e) {
+    } catch (GuzzleHttp\Exception\ServerException $e) {
       $code   = $e->getResponse()->getStatusCode();
       $phrase = $e->getResponse()->getReasonPhrase();
       echo "Woah. Something is wrong in the land of MailChimp.\n";
