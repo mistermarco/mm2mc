@@ -7,6 +7,14 @@ mc:
   # http://kb.mailchimp.com/lists/managing-subscribers/find-your-list-id
   list_id: <your list id>
 
+# Slack Configuration
+# https://api.slack.com/incoming-webhooks
+slack:
+  endpoint: https://hooks.slack.com/services/<your key>
+  username: <any username you want to use>
+  channel:  <any channel, e.g. '#test'>
+  icon:     <any available emoji icon, e.g.: ':monkey:'>
+
 # Database Connection Information
 db:
     driver:   pdo_mysql

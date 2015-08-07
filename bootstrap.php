@@ -52,3 +52,13 @@ $client = new Client([
   'headers' => ['Authorization' => "apikey $api_key"],
   // Use the 'X-Trigger-Error' => 'InternalServerError' header to test server errors
 ]);
+
+$slack = new Slack(
+  $config['slack']['endpoint'],
+  array(
+    'username' => $config['slack']['username'],
+    'icon'     => $config['slack']['icon'],
+    'channel'  => $config['slack']['channel'],
+  )
+);
+

@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/bootstrap.php';
 
+$message = "Running Mailman to MailChimp Script...\n";
+
 $lists = $config['lists'];
 
 // Create a new queue and fill it with the lists
@@ -54,18 +56,18 @@ foreach ($subscribers as $address) {
 
 	  // keep track of new subscribers
 	  $new_subscribers[] = $address;
-      echo $body->email_address . ' has been ' . $body->status . "\n";
+      $message .= $body->email_address . ' has been ' . $body->status . "\n";
     } catch (GuzzleHttp\Exception\ClientException $e) {
       // Return any errors
       $code   = $e->getResponse()->getStatusCode();
       $phrase = $e->getResponse()->getReasonPhrase();
-	  echo "$code: $phrase\n";
+	  $message .="$code: $phrase\n";
 
 	  // MailChimp will return a 400 if the email is already in the list
 	  // subscribed or unsubscribed
 	  if ($code == 400) {
         $body = json_decode($e->getResponse()->getBody());
-	    echo $body->detail . "\n";
+	    $message .= $body->detail . "\n";
         if (preg_match('/already a list member/', $body->detail)) {
 		  // user was subscribed in some other way, let's add to the database
 		  $email = new Email($address);
@@ -75,9 +77,9 @@ foreach ($subscribers as $address) {
     } catch (GuzzleHttp\Exception\ServerException $e) {
       $code   = $e->getResponse()->getStatusCode();
       $phrase = $e->getResponse()->getReasonPhrase();
-      echo "Woah. Something is wrong in the land of MailChimp.\n";
-	  echo "Status: $code\nReason: $phrase\n";
-	  echo "Exiting. Try again later.\n";
+      $message .= "Woah. Something is wrong in the land of MailChimp.\n";
+	  $message .= "Status: $code\nReason: $phrase\n";
+	  $message .= "Exiting. Try again later.\n";
 	  exit;
 	}
   }
@@ -86,7 +88,18 @@ foreach ($subscribers as $address) {
 // Save everything to the database
 $em->flush();
 
+$new_count = 0;
+
 // Print out the results
 foreach ($new_subscribers as $email) {
-  echo $email . "\n";
+  $new_count++;
+  $message .= $email . "\n";
 }
+
+if ($new_count == 0) {
+  $message .= "No new subscribers today. :(";
+}
+
+$slack->sendMessage($message);
+
+echo $message;

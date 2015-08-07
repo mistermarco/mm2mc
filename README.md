@@ -31,6 +31,7 @@ Run Composer
 
     php composer.phar install
 
+For Slack Integration, set up an incoming webhook: https://api.slack.com/incoming-webhooks
 Copy app/config/config.yml.sample to a new /app/config/config.yml and enter your information. Run the application by typing:
 
     php subscribers.php
