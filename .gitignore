@@ -3,3 +3,5 @@ composer.lock
 composer.phar
 vendor/
 app/config/config.yml
+keytab
+.htaccess
