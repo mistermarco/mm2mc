@@ -47,9 +47,11 @@ if (preg_match('/.*\-(us.*)$/', $api_key, $matches)) {
 
 // Set up Guzzle Client which we'll use to connect to the MailChimp API
 $client = new Client([
-  'base_uri' => $mc_api_url,
+  'base_url' => $mc_api_url,
   'timeout' => 2.0,
-  'headers' => ['Authorization' => "apikey $api_key"],
+  'defaults' => [
+    'headers' => ['Authorization' => "apikey $api_key"],
+  ],
   // Use the 'X-Trigger-Error' => 'InternalServerError' header to test server errors
 ]);
 
