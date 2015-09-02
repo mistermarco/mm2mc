@@ -90,10 +90,9 @@ $em->flush();
 
 $new_count = 0;
 
-// Print out the results
 foreach ($new_subscribers as $email) {
   $new_count++;
-  $message .= $email . "\n";
+//  $message .= $email . "\n";
 }
 
 if ($new_count == 0) {
