@@ -44,6 +44,9 @@ class MailingList
       array_pop($results);
 
       foreach ($results as $email) {
+          // sometimes lists include the name of the subscriber or list
+          // in that case, the email is in angle brackets
+          $email = preg_replace('/(.*)<(.*)>/', '$2', $email);
         // is the email a list?
         if (preg_match('/lists\.stanford\.edu/', $email)) {
           // only add the part before "lists.stanford.edu"
@@ -51,7 +54,7 @@ class MailingList
         } else {
           // sometimes lists include the name of the subscriber
           // in that case, the email is in angle brackets
-          $this->emails[] = preg_replace('/(.*)<(.*)>/', '$2', $email);
+          $this->emails[] = $email;
         }
       }
     }
