@@ -1,3 +1,6 @@
+#General Configuration
+general:
+  name: <name of app>
 # MailChimp Configuration
 mc:
   # https://apidocs.mailchimp.com/

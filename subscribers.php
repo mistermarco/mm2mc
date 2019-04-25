@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/bootstrap.php';
 
-$message = "Running Mailman to MailChimp Script...\n";
+$message = "Running Mailman to MailChimp Script for $app_name...\n";
 
 $lists = $config['lists'];
 

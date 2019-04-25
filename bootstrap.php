@@ -13,6 +13,9 @@ use GuzzleHttp\Exception\ServerException;
 $yaml = new Parser();
 $config = $yaml->parse(file_get_contents(__DIR__ . '/app/config/config.yml'));
 
+// General Settings
+$app_name = $config['general']['name'];
+
 // MailChimp Settings
 $api_key = $config['mc']['api_key'];
 $list_id = $config['mc']['list_id'];
