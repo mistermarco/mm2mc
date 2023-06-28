@@ -35,7 +35,7 @@ class MailingList
   private function get_members() {
     $results = array();
 
-    exec("remctl mailman mm who $this->name", $results, $status);
+    exec("remctl mailman.stanford.edu mm who $this->name", $results, $status);
 
     // the call succeeded
     if ($status == 0) {
