@@ -1,6 +1,10 @@
 #General Configuration
 general:
   name: <name of app>
+  # Unsubscribe emails if they are no longer on the mailman list (set to 1)
+  # The default is to add new emails to Mailchimp only
+  unsubscribe: 0
+
 # MailChimp Configuration
 mc:
   # https://apidocs.mailchimp.com/

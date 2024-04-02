@@ -14,7 +14,8 @@ $yaml = new Parser();
 $config = $yaml->parse(file_get_contents(__DIR__ . '/app/config/config.yml'));
 
 // General Settings
-$app_name = $config['general']['name'];
+$app_name    = $config['general']['name'];
+$unsubscribe = $config['general']['unsubscribe'];
 
 // MailChimp Settings
 $api_key = $config['mc']['api_key'];
